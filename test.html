@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vCard Parser</title>
+    <script type="text/javascript" src="parser.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+
+    var sampleData = "BEGIN:VCARD\n\
+VERSION:3.0\n\
+N:Doe;John;;;\n\
+FN:John Doe\n\
+ORG:Example.com Inc.;\n\
+TITLE:Imaginary test person\n\
+EMAIL;type=INTERNET;type=WORK;type=pref:johnDoe@example.org\n\
+BDAY:19960415\n\
+TEL;type=WORK;type=pref:+1 617 555 1212\n\
+TEL;type=CELL:+1 781 555 1212\n\
+TEL;type=HOME:+1 202 555 1212\n\
+TEL;type=WORK:+1 (617) 555-1234\n\
+item1.ADR;type=WORK:;;2 Example Avenue;Anytown;NY;01111;USA\n\
+item1.X-ABADR:us\n\
+item2.ADR;type=HOME;type=pref:;;3 Acacia Avenue;Newtown;MA;02222;USA\n\
+item2.X-ABADR:us\n\
+NOTE:John Doe has a long and varied history\\, being documented on more police files that anyone else. Reports of his death are alas numerous.\n\
+item3.URL;type=pref:http\://www.example/com/doe\n\
+item4.URL:http\://www.example.com/Joe/foaf.df\n\
+item4.X-ABLabel:FOAF\n\
+item5.X-ABRELATEDNAMES;type=pref:Jane Doe\n\
+item5.X-ABLabel:_$!<Friend>!$_\n\
+CATEGORIES:Work,Test group\n\
+X-ABUID:5AD380FD-B2DE-4261-BA99-DE1D1DB52FBE\:ABPerson\n\
+END:VCARD\n";
+
+    var sampleData2 = "begin:vcard\n\
+source:ldap://cn=Meister%20Berger,o=Universitaet%20Goerlitz,c=DE\n\
+name:Meister Berger\n\
+fn:Meister Berger\n\
+n:Berger;Meister\n\
+bday;value=date:1963-09-21\n\
+o:Universit=E6t G=F6rlitz\n\
+title:Mayor\n\
+title;language=de;value=text:Burgermeister\n\
+note:The Mayor of the great city of\n\
+  Goerlitz in the great country of Germany.\n\
+email;internet:mb@goerlitz.de\n\
+home.tel;type=fax,voice,msg:+49 3581 123456\n\
+home.label:Hufenshlagel 1234\n\
+ 02828 Goerlitz\n\
+ Deutschland\
+key;type=X509;encoding=b:MIICajCCAdOgAwIBAgICBEUwDQYJKoZIhvcNAQEEBQ\n\
+ AwdzELMAkGA1UEBhMCVVMxLDAqBgNVBAoTI05ldHNjYXBlIENvbW11bmljYXRpb25zI\n\
+ ENvcnBvcmF0aW9uMRwwGgYDVQQLExNJbmZvcm1hdGlvbiBTeXN0ZW1zMRwwGgYDVQQD\n\
+ ExNyb290Y2EubmV0c2NhcGUuY29tMB4XDTk3MDYwNjE5NDc1OVoXDTk3MTIwMzE5NDc\n\
+ 1OVowgYkxCzAJBgNVBAYTAlVTMSYwJAYDVQQKEx1OZXRzY2FwZSBDb21tdW5pY2F0aW\n\
+ 9ucyBDb3JwLjEYMBYGA1UEAxMPVGltb3RoeSBBIEhvd2VzMSEwHwYJKoZIhvcNAQkBF\n\
+ hJob3dlc0BuZXRzY2FwZS5jb20xFTATBgoJkiaJk/IsZAEBEwVob3dlczBcMA0GCSqG\n\
+ SIb3DQEBAQUAA0sAMEgCQQC0JZf6wkg8pLMXHHCUvMfL5H6zjSk4vTTXZpYyrdN2dXc\n\
+ oX49LKiOmgeJSzoiFKHtLOIboyludF90CgqcxtwKnAgMBAAGjNjA0MBEGCWCGSAGG+E\n\
+ IBAQQEAwIAoDAfBgNVHSMEGDAWgBT84FToB/GV3jr3mcau+hUMbsQukjANBgkqhkiG9\n\
+ w0BAQQFAAOBgQBexv7o7mi3PLXadkmNP9LcIPmx93HGp0Kgyx1jIVMyNgsemeAwBM+M\n\
+ SlhMfcpbTrONwNjZYW8vJDSoi//yrZlVt9bJbs7MNYZVsyF1unsqaln4/vy6Uawfg8V\n\
+ UMk1U7jt8LYpo4YULU7UZHPYVUaSgVttImOHZIKi4hlPXBOhcUQ==\n\
+end:vcard\n";
+
+    var sampleData_v21 = "BEGIN:VCARD\n\
+VERSION:2.1\n\
+N:Gump;Forrest\n\
+FN:Forrest Gump\n\
+ORG:Bubba Gump Shrimp Co.\n\
+TITLE:Shrimp Man\n\
+PHOTO;GIF:http://www.example.com/dir_photos/my_photo.gif\n\
+TEL;WORK;VOICE:(111) 555-1212\n\
+TEL;HOME;VOICE:(404) 555-1212\n\
+ADR;WORK:;;100 Waters Edge;Baytown;LA;30314;United States of America\n\
+LABEL;WORK;ENCODING=QUOTED-PRINTABLE:100 Waters Edge=0D=0ABaytown, LA 30314=0D=0AUnited States of America\n\
+ADR;HOME:;;42 Plantation St.;Baytown;LA;30314;United States of America\n\
+LABEL;HOME;ENCODING=QUOTED-PRINTABLE:42 Plantation St.=0D=0ABaytown, LA 30314=0D=0AUnited States of America\n\
+EMAIL;PREF;INTERNET:forrestgump@example.com\n\
+REV:20080424T195243Z\n\
+END:VCARD";
+
+    var sampleData_v30 = "BEGIN:VCARD\n\
+VERSION:3.0\n\
+N:Gump;Forrest;;Mr.\n\
+FN:Forrest Gump\n\
+ORG:Bubba Gump Shrimp Co.\n\
+TITLE:Shrimp Man\n\
+PHOTO;VALUE=URL;TYPE=GIF:http://www.example.com/dir_photos/my_photo.gif\n\
+TEL;TYPE=WORK,VOICE:(111) 555-1212\n\
+TEL;TYPE=HOME,VOICE:(404) 555-1212\n\
+ADR;TYPE=WORK:;;100 Waters Edge;Baytown;LA;30314;United States of America\n\
+LABEL;TYPE=WORK:100 Waters Edge\\nBaytown\\, LA 30314\\nUnited States of Ameri\n\
+ ca\n\
+ADR;TYPE=HOME:;;42 Plantation St.;Baytown;LA;30314;United States of America\n\
+LABEL;TYPE=HOME:42 Plantation St.\\nBaytown\\, LA 30314\\nUnited States of Ame\n\
+ rica\n\
+EMAIL;TYPE=PREF,INTERNET:forrestgump@example.com\n\
+REV:2008-04-24T19:52:43Z\n\
+END:VCARD";
+
+    var sampleData_v40 = "BEGIN:VCARD\n\
+VERSION:4.0\n\
+N:Gump;Forrest;;;\n\
+FN:Forrest Gump\n\
+ORG:Bubba Gump Shrimp Co.\n\
+TITLE:Shrimp Man\n\
+PHOTO;MEDIATYPE=image/gif:http://www.example.com/dir_photos/my_photo.gif\n\
+TEL;TYPE=work,voice;VALUE=uri:tel:+11115551212\n\
+TEL;TYPE=home,voice;VALUE=uri:tel:+14045551212\n\
+ADR;TYPE=work;LABEL=\"100 Waters Edge\\nBaytown, LA 30314\\nUnited States of A\n\
+ merica\":;;100 Waters Edge;Baytown;LA;30314;United States of America\n\
+ADR;TYPE=home;LABEL=\"42 Plantation St.\\nBaytown, LA 30314\\nUnited States of\n\
+ America\":;;42 Plantation St.;Baytown;LA;30314;United States of America\n\
+EMAIL:forrestgump@example.com\n\
+REV:20080424T195243Z\n\
+END:VCARD";
+
+    console.info(vCardParser.parse(sampleData_v40));
+
+</script>
+check console.
+</body>
+</html>
