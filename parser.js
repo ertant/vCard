@@ -1,18 +1,18 @@
 ﻿var vCardParser = (function () {
 
     var fieldPropertyMapping = {
-        "TITLE": "Title",
-        "TEL": "Telephone",
-        "FN": "DisplayName",
-        "N": "Name",
-        "EMAIL": "Email",
-        "CATEGORIES": "Categories",
-        "ADR": "Address",
-        "URL": "Url",
-        "NOTE": "Notes",
-        "ORG": "Organization",
-        "BDAY": "BirthDay",
-        "PHOTO": "Photo"
+        "TITLE": "title",
+        "TEL": "telephone",
+        "FN": "displayName",
+        "N": "name",
+        "EMAIL": "email",
+        "CATEGORIES": "categories",
+        "ADR": "address",
+        "URL": "url",
+        "NOTE": "notes",
+        "ORG": "organization",
+        "BDAY": "birthday",
+        "PHOTO": "photo"
     };
 
     function lookupField(context, fieldName) {
