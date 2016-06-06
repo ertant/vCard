@@ -120,13 +120,13 @@
 
             return {
                 // ADR field sequence
-                PostOfficeBox: names[0],
-                Number: names[1],
-                Street: names[2] || '',
-                City: names[3] || '',
-                Region: names[4] || '',
-                PostalCode: names[5] || '',
-                Country: names[6] || ''
+                postOfficeBox: names[0],
+                number: names[1],
+                street: names[2] || '',
+                city: names[3] || '',
+                region: names[4] || '',
+                postalCode: names[5] || '',
+                country: names[6] || ''
             };
 
         });
@@ -179,7 +179,7 @@
                 fieldTypeInfo = typeInfo.slice(1).map(function (type) {
                     var info = type.split('=');
                     return {
-                        name: info[0].toUpperCase(),
+                        name: info[0].toLowerCase(),
                         value: info[1].replace(/"(.*)"/, '$1')
                     }
                 });

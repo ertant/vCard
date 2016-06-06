@@ -74,13 +74,13 @@ You may check the test.html for more detail and samples.
                          "LABEL": "100 Waters Edge\nBaytown, LA 30314\nUnited States of America"
                      },
                      "value": {
-                         "PostOfficeBox": "",
-                         "Number": "",
-                         "Street": "100 Waters Edge",
-                         "City": "Baytown",
-                         "Region": "LA",
-                         "PostalCode": "30314",
-                         "Country": "United States of America"
+                         "postOfficeBox": "",
+                         "number": "",
+                         "street": "100 Waters Edge",
+                         "city": "Baytown",
+                         "region": "LA",
+                         "postalCode": "30314",
+                         "country": "United States of America"
                      }
                  },
                  {
@@ -90,13 +90,13 @@ You may check the test.html for more detail and samples.
                          "LABEL": "42 Plantation St.\nBaytown, LA 30314\nUnited States ofAmerica"
                      },
                      "value": {
-                         "PostOfficeBox": "",
-                         "Number": "",
-                         "Street": "42 Plantation St.",
-                         "City": "Baytown",
-                         "Region": "LA",
-                         "PostalCode": "30314",
-                         "Country": "United States of America"
+                         "postOfficeBox": "",
+                         "number": "",
+                         "street": "42 Plantation St.",
+                         "city": "Baytown",
+                         "region": "LA",
+                         "postalCode": "30314",
+                         "country": "United States of America"
                      }
                  }
              ],
