@@ -37,18 +37,18 @@ You may check the test.html for more detail and samples.
 
     [
          {
-             "Name": {
+             "name": {
                  "surname": "Gump",
                  "name": "Forrest",
                  "additionalName": "",
                  "prefix": "",
                  "suffix": ""
              },
-             "DisplayName": "Forrest Gump",
-             "Organization": "Bubba Gump Shrimp Co.",
-             "Title": "Shrimp Man",
-             "Photo": "http://www.example.com/dir_photos/my_photo.gif",
-             "Telephone": [
+             "displayName": "Forrest Gump",
+             "organization": "Bubba Gump Shrimp Co.",
+             "title": "Shrimp Man",
+             "photo": "http://www.example.com/dir_photos/my_photo.gif",
+             "telephone": [
                  {
                      "isDefault": false,
                      "valueInfo": {
@@ -66,7 +66,7 @@ You may check the test.html for more detail and samples.
                      "value": "tel:+14045551212"
                  }
              ],
-             "Address": [
+             "address": [
                  {
                      "isDefault": false,
                      "valueInfo": {
@@ -100,7 +100,7 @@ You may check the test.html for more detail and samples.
                      }
                  }
              ],
-             "Email": [
+             "email": [
                  {
                      "isDefault": false,
                      "valueInfo": {
